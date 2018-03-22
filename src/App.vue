@@ -1,23 +1,46 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div id="app" class="app">
+    <toolbar></toolbar>
+    <notes-list></notes-list>
+    <editor></editor>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
-}
-</script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html, #app {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    max-height: 100%;
+    position: relative;
+  }
 </style>
+
+<script>
+  import Toolbar from './components/Toolbar';
+  import NotesList from './components/NotesList';
+  import Editor from './components/Editor';
+  import store from './vuex/store';
+  import { initStore } from './vuex/actions';
+
+  export default {
+    components: {
+      Toolbar,
+      NotesList,
+      Editor
+    },
+    store,
+    vuex: {
+      actions: {
+        initStore
+      }
+    },
+    ready() {
+      this.initStore()
+    }
+  }
+</script>
